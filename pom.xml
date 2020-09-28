@@ -21,6 +21,9 @@
         <version>1.4.0</version>
         <configuration>
           <mainClass>com.develwithoutacause.WebDriverDevToolsExtension</mainClass>
+
+          <!-- WebDriver crashes on shut down unless this is set. -->
+          <cleanupDaemonThreads>false</cleanupDaemonThreads>
         </configuration>
       </plugin>
     </plugins>
