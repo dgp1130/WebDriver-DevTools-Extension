@@ -8,12 +8,13 @@ public class WebDriverDevToolsExtension {
   public static void main(final String[] args) {
     System.setProperty("webdriver.chrome.driver", "tools/chromedriver");
     final var driver = new ChromeDriver(new ChromeOptions()
-        .setHeadless(true)
+        .addArguments("--load-extension=extension/")
     );
-    driver.get("https://www.google.com/");
-    final var element = driver.findElement(By.tagName("body"));
-    if (element == null) throw new Error("No <body /> tag!");
-    System.out.println(element);
+
+    driver.get("chrome-extension://jdoodjfonfnbmfgjaecohljglapahego/panel.html");
+    final var header = driver.findElement(By.tagName("h2"));
+    if (!header.getText().equals("Hello World!")) throw new Error("No header!");
+
     driver.quit();
   }
 }
