@@ -1,6 +1,5 @@
 package com.develwithoutacause;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -9,11 +8,11 @@ public class WebDriverDevToolsExtension {
     System.setProperty("webdriver.chrome.driver", "tools/chromedriver");
     final var driver = new ChromeDriver(new ChromeOptions()
         .addArguments("--load-extension=extension/")
+        .addArguments("--auto-open-devtools-for-tabs")
     );
 
-    driver.get("chrome-extension://jdoodjfonfnbmfgjaecohljglapahego/panel.html");
-    final var header = driver.findElement(By.tagName("h2"));
-    if (!header.getText().equals("Hello World!")) throw new Error("No header!");
+    // Seems like this is a "Chrome DevTools Protocol" session, not the "DevTools" UI.
+    driver.getDevTools().createSession();
 
     driver.quit();
   }
